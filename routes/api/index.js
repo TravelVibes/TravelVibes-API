@@ -1,10 +1,12 @@
 import express from 'express';
-import userRoutes from '../User';
-import destinationRoutes from '../Destination';
+import attractionRoutes from '../Attraction';
+import authRoutes from '../Auth';
+import journeyRoutes from '../Journey';
 
 const apiRoutes = express.Router();
 
-apiRoutes.use('/user', userRoutes);
-apiRoutes.use('/destination', destinationRoutes);
+apiRoutes.use('/auth', authRoutes);
+apiRoutes.use('/attractions', attractionRoutes);
+apiRoutes.use('/journeys', journeyRoutes);
 
 export default apiRoutes;

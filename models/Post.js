@@ -51,9 +51,9 @@ const postSchema = new Schema({
     required: false,
     default: false,
   },
-  destinationID: {
+  attractionID: {
     type: Schema.Types.ObjectId,
-    ref: 'Destination',
+    ref: 'Attractions',
   },
 });
 
