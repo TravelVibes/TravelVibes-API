@@ -25,6 +25,13 @@ const attractionSchema = new Schema({
   address: {
     type: String,
   },
+  rating: {
+    type: Number,
+  },
+  NoRating: {
+    type: Number,
+    default: 0,
+  },
 });
 
 attractionSchema.set('timestamps', true);

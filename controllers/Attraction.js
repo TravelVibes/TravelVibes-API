@@ -41,3 +41,12 @@ export const fetchSingleAttraction = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const searchAttraction = async (attractionID) => {
+  try {
+    const attraction = await Attraction.find(attractionID);
+    return attraction;
+  } catch (error) {
+    return null;
+  }
+};
