@@ -3,12 +3,18 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import mainRoute from './routes';
+import bodyParser from 'body-parser';
+import helmet from 'helmet';
+import morgan from 'morgan';
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
 const app = express();
 
 // set cors
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
+app.use(morgan('common'));
 app.options('*', cors());
 app.use(cors());
 
@@ -21,6 +27,8 @@ app.get('/', (req, res, next) => {
 // handle req.body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(bodyParser.json({ limit: '30mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
 // connect route
 app.use('/', mainRoute);

@@ -12,10 +12,10 @@ const journeySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  destinations: [
+  attractions: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Destination',
+      ref: 'Attraction',
     },
   ],
 });

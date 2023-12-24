@@ -1,3 +1,3 @@
-export const testUser = (req, res, next) => {
+export const testUser = (req, res) => {
   res.status(200).send('Test good');
 };
