@@ -14,7 +14,7 @@ const isAuth = (req, res, next) => {
     // attract token from request
     let decodedToken = req.get('authorization').split(' ')[1];
     // console.log("decodedToken ", decodedToken);
-    let user = jwt.verify(decodedToken, process.env.SECRET_JWT);
+    let user = jwt.verify(decodedToken, process.env.JWT_SECRET);
     // console.log("user ", user);
     req.userId = user.id;
     next();

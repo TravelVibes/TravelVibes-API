@@ -28,7 +28,7 @@ const attractionSchema = new Schema({
   rating: {
     type: Number,
   },
-  NoRating: {
+  noRatings: {
     type: Number,
     default: 0,
   },
