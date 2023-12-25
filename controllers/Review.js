@@ -10,12 +10,12 @@ export const fetchReviews = async (req, res) => {
     if (!rating) {
       reviews = await Review.find({ attraction: attractionID })
         .limit(5)
-        .populate('user');
+        .populate({ path: 'user', select: 'firstName lastName avatar' });
     } else {
       reviews = await Review.find({
         attraction: attractionID,
         rating,
-      }).populate('user');
+      }).populate({ path: 'user', select: 'firstName lastName avatar' });
     }
     res.status(httpStatus.OK).json(reviews);
   } catch (error) {
@@ -23,14 +23,17 @@ export const fetchReviews = async (req, res) => {
   }
 };
 
-export const createReview = async (req, res) => {
+export const createReview = async (req, res, next) => {
   const attractionID = req.params.attractionID;
   // hard code user id for now: foden: 65840d669b9bf486c910d9e0
   const userID = '65840d669b9bf486c910d9e0';
-
   try {
-    // const attraction = searchAttraction(attractionID);
     const attraction = await Attraction.findById(attractionID);
+
+    // get number of ratings and current rating of that attraction
+    const { noRatings } = attraction;
+    const attractionRating = attraction.rating ?? 0;
+    console.log('hieu ', noRatings, attractionRating);
 
     if (!attraction) {
       return res
@@ -38,6 +41,7 @@ export const createReview = async (req, res) => {
         .json({ error: 'Attraction not found' });
     }
     const { rating, content, images } = req.body;
+    console.log('hieu user score', rating);
     // TODO handle  images uploading to S3
     const newReview = new Review({
       attraction: attractionID,
@@ -67,6 +71,7 @@ export const editReview = async (req, res) => {
     }
     const updatedData = req.body;
     // TODO handle  images uploading to S3
+    console.log('hieu ', updatedData);
     const updateReview = await Review.findByIdAndUpdate(
       reviewID,
       {
