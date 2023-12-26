@@ -21,8 +21,10 @@ const reviewSchema = new Schema({
   },
   images: [
     {
-      type: String,
-      required: false,
+      fileName: {
+        type: String,
+        required: true,
+      },
     },
   ],
 });
