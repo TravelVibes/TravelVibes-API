@@ -4,7 +4,7 @@ import {
   deleteReview,
   editReview,
   fetchReviews,
-} from '../controllers/Review';
+} from '../controllers/Review.js';
 import multer from 'multer';
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });

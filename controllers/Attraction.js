@@ -1,5 +1,5 @@
-import Attraction from '../models/Attraction';
-import { httpStatus } from '../utils/httpStatus';
+import Attraction from '../models/Attraction.js';
+import { httpStatus } from '../utils/httpStatus.js';
 
 export const getAllAttractions = async (req, res) => {
   try {

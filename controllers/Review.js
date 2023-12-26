@@ -1,8 +1,8 @@
-import Attraction from '../models/Attraction';
-import Review from '../models/Review';
-import { httpStatus } from '../utils/httpStatus';
-import { s3Upload } from '../utils/uploadFile';
-import { calculateRating } from '../utils/calculateRating';
+import Attraction from '../models/Attraction.js';
+import Review from '../models/Review.js';
+import { httpStatus } from '../utils/httpStatus.js';
+import { s3Upload } from '../utils/uploadFile.js';
+import { calculateRating } from '../utils/calculateRating.js';
 
 export const fetchReviews = async (req, res) => {
   const { rating } = req.query;

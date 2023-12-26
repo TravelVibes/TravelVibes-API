@@ -5,7 +5,7 @@ import {
   fetchAllJourneys,
   fetchSingleJourney,
   updateJourney,
-} from '../controllers/Journey';
+} from '../controllers/Journey.js';
 
 const journeyRoutes = express.Router();
 

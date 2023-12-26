@@ -1,8 +1,8 @@
 import express from 'express';
-import attractionRoutes from '../Attraction';
-import authRoutes from '../Auth';
-import journeyRoutes from '../Journey';
-import reviewRoutes from '../Review';
+import attractionRoutes from '../Attraction.js';
+import authRoutes from '../Auth.js';
+import journeyRoutes from '../Journey.js';
+import reviewRoutes from '../Review.js';
 
 const apiRoutes = express.Router();
 
