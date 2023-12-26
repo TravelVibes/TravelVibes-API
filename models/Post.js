@@ -7,34 +7,10 @@ const postSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  content: {
+  caption: {
     type: String,
     required: false,
   },
-  // images: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'Document',
-  //   },
-  // ],
-  // videos: [
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'Document',
-  //   },
-  // ],
-  images: [
-    {
-      type: String,
-      required: false,
-    },
-  ],
-  videos: [
-    {
-      type: String,
-      required: false,
-    },
-  ],
   upvote: [
     {
       type: Schema.Types.ObjectId,
@@ -46,15 +22,17 @@ const postSchema = new Schema({
     required: false,
     default: 0,
   },
-  isLiked: {
+  isUpvote: {
     type: Boolean,
     required: false,
     default: false,
   },
-  attractionID: {
-    type: Schema.Types.ObjectId,
-    ref: 'Attractions',
-  },
+  attractions: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Attraction',
+    },
+  ],
 });
 
 postSchema.set('timestamps', true);

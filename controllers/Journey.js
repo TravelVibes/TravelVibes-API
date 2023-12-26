@@ -22,8 +22,7 @@ export const fetchSingleJourney = async (req, res) => {
 
 export const createJourney = async (req, res) => {
   try {
-    // hard code user id for now: harrynguyen: 65840cd36fb15fffda3a62ed
-    const userID = '65840cd36fb15fffda3a62ed';
+    const userID = req.userID;
     const { title, attractions } = req.body;
 
     const newJourney = new Journey({

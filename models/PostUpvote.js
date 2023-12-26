@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 
-const postLikeSchema = new mongoose.Schema({
-  postID: {
+const postVoteSchema = new mongoose.Schema({
+  post: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post',
   },
-  userID: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
@@ -14,5 +14,5 @@ const postLikeSchema = new mongoose.Schema({
     required: false,
   },
 });
-postLikeSchema.set('timestamps', true);
-export default mongoose.model('PostLike', postLikeSchema);
+postVoteSchema.set('timestamps', true);
+export default mongoose.model('PostUpvote', postVoteSchema);
