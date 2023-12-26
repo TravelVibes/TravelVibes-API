@@ -16,7 +16,7 @@ const isAuth = (req, res, next) => {
     // console.log("decodedToken ", decodedToken);
     let user = jwt.verify(decodedToken, process.env.JWT_SECRET);
     // console.log("user ", user);
-    req.userId = user.id;
+    req.user = user;
     next();
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
@@ -31,4 +31,4 @@ const isAuth = (req, res, next) => {
   }
 };
 
-export default isAuth;
+export { isAuth };

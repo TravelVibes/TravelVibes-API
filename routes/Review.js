@@ -6,18 +6,25 @@ import {
   fetchReviews,
 } from '../controllers/Review.js';
 import multer from 'multer';
+import { isAuth } from '../middleware/isAuth.js';
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 const reviewRoutes = express.Router();
 
-reviewRoutes.get('/:attractionID', fetchReviews);
-reviewRoutes.post('/:attractionID', upload.array('images'), createReview);
+reviewRoutes.get('/:attractionID', isAuth, fetchReviews);
+reviewRoutes.post(
+  '/:attractionID',
+  isAuth,
+  upload.array('images'),
+  createReview,
+);
 reviewRoutes.put(
   '/:attractionID/:reviewID',
+  isAuth,
   upload.array('images'),
   editReview,
 );
-reviewRoutes.delete('/:attractionID/:reviewID', deleteReview);
+reviewRoutes.delete('/:attractionID/:reviewID', isAuth, deleteReview);
 
 export default reviewRoutes;
