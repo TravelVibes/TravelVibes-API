@@ -1,7 +1,7 @@
 import AWS from 'aws-sdk';
 import multer from 'multer';
 import express from 'express';
-import { removeSpaceInFileName } from './removeSpaceInFileName';
+import { removeSpaceInFileName } from './removeSpaceInFileName.js';
 
 const uploadRoutes = express.Router();
 

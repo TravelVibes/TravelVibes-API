@@ -1,5 +1,5 @@
-import Journey from '../models/Journey';
-import { httpStatus } from '../utils/httpStatus';
+import Journey from '../models/Journey.js';
+import { httpStatus } from '../utils/httpStatus.js';
 
 export const fetchAllJourneys = async (req, res) => {
   try {

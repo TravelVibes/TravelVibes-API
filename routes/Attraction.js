@@ -2,7 +2,7 @@ import express from 'express';
 import {
   fetchSingleAttraction,
   searchAttractions,
-} from '../controllers/Attraction';
+} from '../controllers/Attraction.js';
 
 const destinationRoutes = express.Router();
 

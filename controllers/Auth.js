@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
-import User from '../models/User';
+import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
-import { httpStatus } from '../utils/httpStatus';
+import { httpStatus } from '../utils/httpStatus.js';
 
 export const register = async (req, res) => {
   try {
@@ -13,6 +13,14 @@ export const register = async (req, res) => {
       phoneNumber,
       // picturePath,
     } = req.body;
+    console.log(
+      'hieu check ',
+      firstName,
+      lastName,
+      email,
+      password,
+      phoneNumber,
+    );
     let user = await User.findOne({
       email: email,
     });

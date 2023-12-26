@@ -1,6 +1,6 @@
 import express from 'express';
-import apiRoutes from './api';
-import { uploadRoutes } from '../utils/uploadFile';
+import apiRoutes from './api/index.js';
+import { uploadRoutes } from '../utils/uploadFile.js';
 // const path = require("path");
 
 const mainRouter = express.Router();

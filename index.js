@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import mainRoute from './routes';
+import mainRoute from './routes/index.js';
 import helmet from 'helmet';
 import morgan from 'morgan';
 
@@ -24,6 +24,10 @@ app.use(cors());
 // handle req.body
 
 // connect route
+app.get('/', (req, res) => {
+  res.send('Ok');
+});
+
 app.use('/', mainRoute);
 
 // error handlers
