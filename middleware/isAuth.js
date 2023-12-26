@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 
 import dotenv from 'dotenv';
-import User from '../models/User';
-import { httpStatus } from '../utils/httpStatus';
+import User from '../models/User.js';
+import { httpStatus } from '../utils/httpStatus.js';
 dotenv.config();
 
 const isAuth = async (req, res, next) => {

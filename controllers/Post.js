@@ -1,5 +1,5 @@
-import Post from '../models/Post';
-import { httpStatus } from '../utils/httpStatus';
+import Post from '../models/Post.js';
+import { httpStatus } from '../utils/httpStatus.js';
 
 export const fetchAllPosts = async (req, res) => {
   try {
