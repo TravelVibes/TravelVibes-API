@@ -9,6 +9,13 @@ export const fetchReviews = async (req, res) => {
   const { attractionID } = req.params;
   let reviews = [];
   try {
+    const attraction = await Attraction.findById(attractionID);
+    if (!attraction) {
+      return res
+        .status(httpStatus.NOT_FOUND)
+        .json({ error: 'Attraction not found' });
+    }
+
     if (!rating) {
       reviews = await Review.find({ attraction: attractionID })
         .limit(5)
@@ -27,8 +34,7 @@ export const fetchReviews = async (req, res) => {
 
 export const createReview = async (req, res) => {
   const attractionID = req.params.attractionID;
-  // hard code user id for now: foden: 65840d669b9bf486c910d9e0
-  const userID = '65840cd36fb15fffda3a62ed';
+  const userID = req.userID;
   try {
     const attraction = await Attraction.findById(attractionID);
 

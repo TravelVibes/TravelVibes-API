@@ -1,9 +1,11 @@
 import jwt from 'jsonwebtoken';
 
 import dotenv from 'dotenv';
+import User from '../models/User';
+import { httpStatus } from '../utils/httpStatus';
 dotenv.config();
 
-const isAuth = (req, res, next) => {
+const isAuth = async (req, res, next) => {
   // check if token is valid
   if (!req.get('authorization')) {
     return res.status(400).json({
@@ -13,10 +15,23 @@ const isAuth = (req, res, next) => {
   try {
     // attract token from request
     let decodedToken = req.get('authorization').split(' ')[1];
-    // console.log("decodedToken ", decodedToken);
-    let user = jwt.verify(decodedToken, process.env.JWT_SECRET);
-    // console.log("user ", user);
-    req.user = user;
+    let decoded = jwt.verify(decodedToken, process.env.JWT_SECRET);
+    const userId = decoded.id;
+    let user;
+    try {
+      user = await User.findById(userId);
+      if (user == null) {
+        return res.status(httpStatus.UNAUTHORIZED).json({
+          message: 'UNAUTHORIZED',
+        });
+      }
+    } catch (error) {
+      return res
+        .status(httpStatus.INTERNAL_SERVER_ERROR)
+        .json({ message: error.message });
+    }
+
+    req.userID = userId;
     next();
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
