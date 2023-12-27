@@ -1,21 +1,17 @@
 import mongoose from 'mongoose';
 
 const postCommentSchema = new mongoose.Schema({
-  postID: {
+  post: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Post',
   },
-  userID: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
   content: {
     type: String,
     required: false,
-  },
-  commentAnswered: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'PostComment',
   },
   isEdited: {
     type: Boolean,

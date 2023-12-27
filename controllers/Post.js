@@ -5,14 +5,43 @@ export const fetchAllPosts = async (req, res) => {
   try {
     // TODO implement following logic later
 
-    const posts = await Post.find();
+    const posts = await Post.find().populate([
+      {
+        path: 'author',
+        select: 'firstName lastName avatar',
+      },
+      { path: 'attractions', select: 'name coordinates' },
+    ]);
+
     res.status(httpStatus.OK).json(posts);
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error.message });
   }
 };
 
-export const getPostDetail = async (req, res) => {};
+export const getPostDetail = async (req, res) => {
+  try {
+    const { id: postID } = req.params;
+    const post = await Post.findById(postID).populate([
+      {
+        path: 'author',
+        select: 'firstName lastName avatar',
+      },
+      { path: 'attractions', select: '-searchText ' },
+      { path: 'upvote', select: 'firstName lastName avatar' },
+    ]);
+
+    if (post == null) {
+      return res
+        .status(httpStatus.NOT_FOUND)
+        .json({ message: 'Can not find post' });
+    }
+
+    res.status(httpStatus.OK).json(post);
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error.message });
+  }
+};
 
 export const createPost = async (req, res) => {
   try {
@@ -77,7 +106,7 @@ export const updatePost = async (req, res) => {
 
     res.status(httpStatus.OK).json(updatedPost);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error.message });
   }
 };
 
