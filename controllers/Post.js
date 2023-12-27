@@ -10,7 +10,7 @@ export const fetchAllPosts = async (req, res) => {
         path: 'author',
         select: 'firstName lastName avatar',
       },
-      { path: 'attractions', select: 'name coordinates' },
+      { path: 'attractions', select: 'name coordinates address' },
     ]);
 
     res.status(httpStatus.OK).json(posts);
