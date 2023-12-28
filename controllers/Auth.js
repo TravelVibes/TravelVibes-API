@@ -13,14 +13,7 @@ export const register = async (req, res) => {
       phoneNumber,
       // picturePath,
     } = req.body;
-    console.log(
-      'hieu check ',
-      firstName,
-      lastName,
-      email,
-      password,
-      phoneNumber,
-    );
+
     let user = await User.findOne({
       email: email,
     });

@@ -33,9 +33,9 @@ export const fetchReviews = async (req, res) => {
 };
 
 export const createReview = async (req, res) => {
-  const attractionID = req.params.attractionID;
-  const userID = req.userID;
   try {
+    const attractionID = req.params.attractionID;
+    const userID = req.userID;
     const attraction = await Attraction.findById(attractionID);
 
     // handle  images uploading to S3
