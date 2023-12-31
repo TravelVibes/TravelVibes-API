@@ -12,7 +12,10 @@ export const getAllComments = async (req, res) => {
         .json({ message: 'Can not find post' });
     }
 
-    const comments = await PostComment.find({ post: postID });
+    const comments = await PostComment.find({ post: postID }).populate(
+      'user',
+      'firstName lastName avatar',
+    );
 
     res.status(httpStatus.OK).json(comments);
   } catch (error) {
