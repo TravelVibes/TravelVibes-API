@@ -32,6 +32,7 @@ const CONST = {
     DECLINE: 'DECLINE',
   },
 
+  DEFAULT_AVATAR: 'uploads/default-avatar.webp',
   //   JWT_SECRET: process.env.JWT_SECRET,
   //   MONGO_URI: process.env.MONGO_URI,
   //   PORT: process.env.PORT,
