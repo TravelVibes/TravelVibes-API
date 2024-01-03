@@ -22,7 +22,7 @@ export const searchAttractions = async (req, res) => {
       name: {
         $regex: new RegExp(searchTerm.toString().toLowerCase(), 'i'),
       },
-    });
+    }).limit(10);
     res.status(201).json(attractions);
   } catch (error) {
     res.status(404).json({ message: error.message });

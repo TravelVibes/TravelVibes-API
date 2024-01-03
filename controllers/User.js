@@ -107,3 +107,34 @@ export const getAllMyReviews = async (req, res) => {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error.message });
   }
 };
+
+export const searchUsers = async (req, res) => {
+  try {
+    const searchTerm = req.query.q;
+    const userID = req.userID;
+
+    if (!searchTerm) {
+      return res.status(201).json([]);
+    }
+
+    const searchTermRegex = new RegExp(
+      searchTerm.toString().toLowerCase(),
+      'i',
+    );
+
+    const users = await User.find({
+      $and: [
+        { _id: { $ne: userID } }, // Exclude the current user
+        {
+          $or: [{ firstName: searchTermRegex }, { lastName: searchTermRegex }],
+        },
+      ],
+    })
+      .select('firstName lastName avatar email')
+      .limit(10);
+
+    res.status(201).json(users);
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error.message });
+  }
+};

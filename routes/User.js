@@ -4,6 +4,7 @@ import {
   getAllMyPosts,
   getAllMyReviews,
   getProfile,
+  searchUsers,
   updateProfile,
 } from '../controllers/User.js';
 import { isAuth } from '../middleware/isAuth.js';
@@ -17,5 +18,7 @@ userRoutes.put('/profile', isAuth, upload.single('avatar'), updateProfile);
 
 userRoutes.get('/posts', isAuth, getAllMyPosts);
 userRoutes.get('/reviews', isAuth, getAllMyReviews);
+
+userRoutes.get('/', isAuth, searchUsers);
 
 export default userRoutes;
