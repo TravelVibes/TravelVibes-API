@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import CONST from '../constraints/CONST';
+import CONST from '../constraints/CONST.js';
 
 const chatSchema = new mongoose.Schema({
   name: {

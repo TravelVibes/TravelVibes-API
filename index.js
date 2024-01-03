@@ -5,10 +5,13 @@ import mongoose from 'mongoose';
 import mainRoute from './routes/index.js';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import { createServer } from 'node:http';
+import { initSocket } from './utils/socketIO.js';
 
 dotenv.config();
 const PORT = process.env.PORT || 8000;
 const app = express();
+const server = createServer(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,14 +24,20 @@ app.use(morgan('common'));
 app.options('*', cors());
 app.use(cors());
 
-// handle req.body
+const io = initSocket(server);
 
-// connect route
-app.get('/', (req, res) => {
-  res.send('Ok');
+server.listen(3000, () => {
+  console.log('Socket on ', 3000);
 });
 
-app.use('/', mainRoute);
+app.use(
+  '/',
+  (req, res, next) => {
+    req.app.set('socket', io);
+    next();
+  },
+  mainRoute,
+);
 
 // error handlers
 // eslint-disable-next-line no-unused-vars

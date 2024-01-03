@@ -33,6 +33,7 @@ const CONST = {
   },
 
   DEFAULT_AVATAR: 'uploads/default-avatar.webp',
+  FE_URL: process.env.FE_URL,
   //   JWT_SECRET: process.env.JWT_SECRET,
   //   MONGO_URI: process.env.MONGO_URI,
   //   PORT: process.env.PORT,
