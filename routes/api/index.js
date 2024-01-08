@@ -6,6 +6,7 @@ import postRoutes from '../Post.js';
 import userRoutes from '../User.js';
 import adminRoutes from '../Admin.js';
 import chatRoutes from '../Chat.js';
+import eventRoutes from '../Event.js';
 
 const apiRoutes = express.Router();
 
@@ -16,6 +17,9 @@ apiRoutes.use('/posts', postRoutes);
 apiRoutes.use('/users', userRoutes);
 apiRoutes.use('/reviews', reviewRoutes);
 apiRoutes.use('/chats', chatRoutes);
+
+apiRoutes.use('/events', eventRoutes);
+
 apiRoutes.use('/admin', adminRoutes);
 
 export default apiRoutes;
