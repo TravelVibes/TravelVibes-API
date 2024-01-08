@@ -32,11 +32,18 @@ const CONST = {
     DECLINE: 'DECLINE',
   },
 
+  EVENT_STATUS: {
+    PENDING: 'PENDING',
+    APPROVE: 'APPROVE',
+    REJECT: 'REJECT',
+    OVERDUE: 'OVERDUE',
+  },
+
   DEFAULT_AVATAR: 'uploads/default-avatar.webp',
   FE_URL: process.env.FE_URL,
-  //   JWT_SECRET: process.env.JWT_SECRET,
-  //   MONGO_URI: process.env.MONGO_URI,
-  //   PORT: process.env.PORT,
+
+  // image size
+  avatar: 30,
 };
 
 export default CONST;
