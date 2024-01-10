@@ -93,7 +93,6 @@ export const updateComment = async (req, res) => {
         .status(httpStatus.NOT_FOUND)
         .json({ message: 'Can not find this comment' });
     }
-
     if (content.trim() !== comment.content) {
       const updatedComment = await PostComment.findByIdAndUpdate(
         commentID,
@@ -107,13 +106,9 @@ export const updateComment = async (req, res) => {
           new: true,
         },
       );
-      res.status(httpStatus.OK).json(updatedComment);
-    } else {
-      // Content has not changed, return the existing comment
-      res.status(httpStatus.OK).json(comment);
+      return res.status(httpStatus.OK).json(updatedComment);
     }
-
-    res.json(comment);
+    res.status(httpStatus.OK).json(comment);
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error.message });
   }
