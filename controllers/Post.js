@@ -5,13 +5,15 @@ export const fetchAllPosts = async (req, res) => {
   try {
     // TODO implement following logic later
 
-    const posts = await Post.find().populate([
-      {
-        path: 'author',
-        select: 'firstName lastName avatar',
-      },
-      { path: 'attractions', select: 'name coordinates address' },
-    ]);
+    const posts = await Post.find()
+      .sort({ createdAt: -1 })
+      .populate([
+        {
+          path: 'author',
+          select: 'firstName lastName avatar',
+        },
+        { path: 'attractions', select: 'name coordinates address' },
+      ]);
 
     res.status(httpStatus.OK).json(posts);
   } catch (error) {

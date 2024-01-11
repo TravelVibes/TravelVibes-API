@@ -129,9 +129,7 @@ export const searchUsers = async (req, res) => {
           $or: [{ firstName: searchTermRegex }, { lastName: searchTermRegex }],
         },
       ],
-    })
-      .select('firstName lastName avatar email')
-      .limit(10);
+    }).select('firstName lastName avatar email');
 
     res.status(201).json(users);
   } catch (error) {

@@ -17,9 +17,10 @@ export const fetchReviews = async (req, res) => {
     }
 
     if (!rating) {
-      reviews = await Review.find({ attraction: attractionID })
-        .limit(5)
-        .populate({ path: 'user', select: 'firstName lastName avatar' });
+      reviews = await Review.find({ attraction: attractionID }).populate({
+        path: 'user',
+        select: 'firstName lastName avatar',
+      });
     } else {
       reviews = await Review.find({
         attraction: attractionID,
@@ -108,7 +109,7 @@ export const editReview = async (req, res) => {
       }
     });
 
-    // TODO handle  images uploading to S3
+    // handle  images uploading to S3
     let s3FilesSaved = [];
     if (req.files && req.files.length !== 0) {
       s3FilesSaved = await s3Upload(req.files);
