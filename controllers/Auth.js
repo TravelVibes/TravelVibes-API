@@ -15,12 +15,12 @@ export const register = async (req, res) => {
     } = req.body;
 
     let user = await User.findOne({
-      email: email,
+      $or: [{ email: email }, { phoneNumber: phoneNumber }],
     });
 
     if (user) {
       return res.status(httpStatus.BAD_REQUEST).json({
-        message: 'Email already exists',
+        message: 'Email or phone number already exists',
       });
     }
 

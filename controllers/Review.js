@@ -17,15 +17,19 @@ export const fetchReviews = async (req, res) => {
     }
 
     if (!rating) {
-      reviews = await Review.find({ attraction: attractionID }).populate({
-        path: 'user',
-        select: 'firstName lastName avatar',
-      });
+      reviews = await Review.find({ attraction: attractionID })
+        .sort({ createdAt: -1 })
+        .populate({
+          path: 'user',
+          select: 'firstName lastName avatar',
+        });
     } else {
       reviews = await Review.find({
         attraction: attractionID,
         rating,
-      }).populate({ path: 'user', select: 'firstName lastName avatar' });
+      })
+        .sort({ createdAt: -1 })
+        .populate({ path: 'user', select: 'firstName lastName avatar' });
     }
     res.status(httpStatus.OK).json(reviews);
   } catch (error) {
