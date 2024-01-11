@@ -19,7 +19,7 @@ eventRoutes.get('/:id', isAuth, getEventDetail);
 eventRoutes.get('/', isAuth, getAllApprovedEvents);
 
 eventRoutes.post('/', isAuth, upload.array('images'), createEvent);
-eventRoutes.put('/:id', isAuth, updateEvent);
+eventRoutes.put('/:id', isAuth, upload.array('images'), updateEvent);
 eventRoutes.delete('/:id', isAuth, deleteEvent);
 
 export default eventRoutes;
