@@ -34,8 +34,8 @@ const CONST = {
 
   EVENT_STATUS: {
     PENDING: 'PENDING',
-    APPROVE: 'APPROVE',
-    REJECT: 'REJECT',
+    APPROVE: 'APPROVED',
+    REJECT: 'REJECTED',
     OVERDUE: 'OVERDUE',
   },
 

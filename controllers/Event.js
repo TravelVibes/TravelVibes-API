@@ -9,7 +9,7 @@ import CONST from '../constraints/CONST.js';
 export const getAllEvents = async (req, res) => {
   try {
     const events = await EventModal.find({})
-      .sort({ createdAt: -1 })
+      .sort({ date: -1 })
       .populate([
         {
           path: 'attraction',
@@ -28,7 +28,7 @@ export const getAllApprovedEvents = async (req, res) => {
     const events = await EventModal.find({
       status: CONST.EVENT_STATUS.APPROVE,
     })
-      .sort({ createdAt: -1 })
+      .sort({ date: -1 })
       .populate([
         {
           path: 'attraction',
@@ -49,7 +49,7 @@ export const getMyEvents = async (req, res) => {
     const events = await EventModal.find({
       poster: userID,
     })
-      .sort({ createdAt: -1 })
+      .sort({ date: -1 })
       .populate([
         {
           path: 'attraction',
@@ -224,6 +224,31 @@ export const deleteEvent = async (req, res) => {
 // handles the approval/rejection of events.
 export const manageEventApproval = async (req, res) => {
   try {
+    const { status } = req.body;
+    const { id } = req.params;
+    console.log('hieu check ', status, id);
+    const event = await EventModal.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          status: status,
+        },
+      },
+      {
+        new: true,
+      },
+    ).populate([
+      {
+        path: 'attraction',
+        select: 'name coordinates images address rating',
+      },
+      {
+        path: 'poster',
+        select: 'firstName lastName avatar',
+      },
+    ]);
+
+    res.status(httpStatus.OK).json(event);
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error.message });
   }

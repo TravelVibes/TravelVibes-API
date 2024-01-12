@@ -2,17 +2,11 @@ import bcrypt from 'bcrypt';
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import { httpStatus } from '../utils/httpStatus.js';
+import CONST from '../constraints/CONST.js';
 
 export const register = async (req, res) => {
   try {
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      phoneNumber,
-      // picturePath,
-    } = req.body;
+    const { firstName, lastName, email, password, phoneNumber } = req.body;
 
     let user = await User.findOne({
       $or: [{ email: email }, { phoneNumber: phoneNumber }],
@@ -34,6 +28,7 @@ export const register = async (req, res) => {
       email,
       password: hashedPassword,
       phoneNumber,
+      avatar: CONST.DEFAULT_AVATAR,
       // picturePath,
       // viewedProfile: Math.floor(Math.random() * 10000),
       // impressions: Math.floor(Math.random() * 10000),
