@@ -12,7 +12,7 @@ export const initSocket = (server) => {
 
   io.on('connection', async (socket) => {
     socket.removeAllListeners();
-
+    // Sending message
     socket.on('join_room', (chatId) => {
       socket.join(chatId);
     });
@@ -40,6 +40,14 @@ export const initSocket = (server) => {
         }
       },
     );
+
+    // Sending Notification
+    // Handle events and emit notifications
+    socket.on('notification', ({ message, objectID }) => {
+      console.log('Notification received:', message, objectID);
+      io.emit('newNotification', message); // Broadcast the notification to all connected clients
+    });
+
     socket.on('disconnect', () => {
       console.log('user disconnect');
     });

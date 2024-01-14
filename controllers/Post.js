@@ -13,6 +13,7 @@ export const fetchAllPosts = async (req, res) => {
           select: 'firstName lastName avatar',
         },
         { path: 'attractions', select: 'name coordinates address' },
+        { path: 'upvote', select: 'firstName lastName avatar' },
       ]);
 
     res.status(httpStatus.OK).json(posts);
@@ -69,6 +70,7 @@ export const createPost = async (req, res) => {
       {
         path: 'attractions',
       },
+      { path: 'upvote', select: 'firstName lastName avatar' },
     ]);
 
     res.status(httpStatus.CREATED).json(populatedPost);
@@ -100,11 +102,14 @@ export const updatePost = async (req, res) => {
       postID,
       { $set: updateData },
       { new: true }, // Return the updated document
-    );
-
-    if (!updatedPost) {
-      return res.status(httpStatus.NOT_FOUND).json({ error: 'Post not found' });
-    }
+    ).populate([
+      {
+        path: 'author',
+        select: 'firstName lastName avatar',
+      },
+      { path: 'attractions', select: '-searchText ' },
+      { path: 'upvote', select: 'firstName lastName avatar' },
+    ]);
 
     res.status(httpStatus.OK).json(updatedPost);
   } catch (error) {

@@ -35,7 +35,14 @@ export const vote = async (req, res) => {
         },
       },
       { new: true },
-    );
+    ).populate([
+      {
+        path: 'author',
+        select: 'firstName lastName avatar',
+      },
+      { path: 'attractions', select: '-searchText ' },
+      { path: 'upvote', select: 'firstName lastName avatar' },
+    ]);
 
     res
       .status(httpStatus.CREATED)
