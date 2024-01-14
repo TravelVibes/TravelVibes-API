@@ -86,7 +86,7 @@ export const updateComment = async (req, res) => {
       _id: commentID,
       post: postID,
       user: userID,
-    });
+    }).populate('user', 'firstName lastName avatar');
 
     if (!comment) {
       return res
@@ -105,7 +105,8 @@ export const updateComment = async (req, res) => {
         {
           new: true,
         },
-      );
+      ).populate('user', 'firstName lastName avatar');
+
       return res.status(httpStatus.OK).json(updatedComment);
     }
     res.status(httpStatus.OK).json(comment);
