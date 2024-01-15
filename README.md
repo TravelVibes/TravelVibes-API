@@ -27,3 +27,7 @@ Before you begin, ensure you have met the following requirements:
     ```
 
 3.  Start the server:`npm start`
+
+### Deployment:
+
+`https://travel-vibes.onrender.com`
