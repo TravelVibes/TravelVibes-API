@@ -253,3 +253,25 @@ export const manageEventApproval = async (req, res) => {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error.message });
   }
 };
+
+export const getEventDetailAdmin = async (req, res) => {
+  try {
+    const { id: eventID } = req.params;
+    const event = await EventModal.findById(eventID)
+      .populate([
+        {
+          path: 'attraction',
+          select: 'name coordinates images address rating',
+        },
+        {
+          path: 'poster',
+          select: 'firstName lastName avatar',
+        },
+      ])
+      .lean();
+
+    res.status(httpStatus.OK).json(event);
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ error: error.message });
+  }
+};
