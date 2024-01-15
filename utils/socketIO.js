@@ -7,6 +7,7 @@ export const initSocket = (server) => {
     connectionStateRecovery: {},
     cors: {
       origin: CONST.FE_URL,
+      allowedHeaders: ['GET', 'POST'],
     },
   });
 

@@ -25,10 +25,7 @@ app.options('*', cors());
 app.use(cors());
 
 const io = initSocket(server);
-
-server.listen(3000, () => {
-  console.log('Socket on ', 3000);
-});
+io.listen(server);
 
 app.use(
   '/',
@@ -60,6 +57,6 @@ mongoose
     console.error('Fail to connect to DB ', errors);
   });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log('App running on port ', PORT);
 });
